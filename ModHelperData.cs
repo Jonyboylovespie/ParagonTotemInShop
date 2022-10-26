@@ -14,7 +14,7 @@ namespace ParagonTotem
             "Adds the paragon power totem to the shop.";
 
         public const string RepoOwner = "Jonyboylovespie";
-        public const string RepoName = "BTD6-Mods";
+        public const string RepoName = "ParagonTotemInShop";
         public const string Icon = "ParagonPowerTotemPortrait.png";
     }
 }

@@ -1,9 +1,3 @@
-﻿using Assets.Scripts.Models.Towers;
-using BTD_Mod_Helper;
-using BTD_Mod_Helper.Api.Towers;
-using BTD_Mod_Helper.Extensions;
-using MelonLoader;
-
 namespace ParagonTotem
 {
     public static class ModHelperData

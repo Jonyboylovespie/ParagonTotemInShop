@@ -5,7 +5,7 @@ namespace ParagonTotem
         public const string Version = "1.0.0";
         public const string Name = "Paragon Totem In Shop";
         public const string Description =
-            "Adds the paragon power totem to the shop.";
+            "This mod adds Geraldo's paragon totem into shop. If you go into mod settings you can turn on OP mode which will instantly get you degree 100 with it down.";
 
         public const string RepoOwner = "Jonyboylovespie";
         public const string RepoName = "ParagonTotemInShop";

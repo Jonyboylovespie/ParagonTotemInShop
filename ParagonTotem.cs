@@ -33,6 +33,8 @@ using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Api.ModOptions;
 using Assets.Scripts.Unity.UI_New.Popups;
 using System.IO;
+using BTD_Mod_Helper.Api.Helpers;
+using Assets.Scripts.Models.Towers.Mods;
 
 [assembly: MelonInfo(typeof(ParagonTotem.Main), ModHelperData.Name, ModHelperData.Version, ModHelperData.RepoOwner)]
 [assembly: MelonGame("Ninja Kiwi", "BloonsTD6")]
@@ -41,173 +43,59 @@ namespace ParagonTotem
 {
         public class Main : BloonsTD6Mod
         {
-            public static string ModFolderPath = MelonHandler.ModsDirectory;
-            public static string ModSettingsPath = MelonHandler.ModsDirectory + "\\BloonsTD6 Mod Helper\\Mod Settings\\ParagonTotemInShopSettings.txt";
-            public static bool OPParagonTotem = false;
             public static bool Cheating;
-            public static bool SettingsEdited = false;
-            public override void OnMainMenu()
+
+        
+        public override void OnNewGameModel(GameModel gameModel, Il2CppSystem.Collections.Generic.List<ModModel> mods)
+        {
+            gameModel.GetTowerFromId("ParagonTotem-ParagonTotem").cost = CostHelper.CostForDifficulty(Settings.TotemCost, mods);
+
+            foreach (var towerModel in gameModel.towers)
             {
-                base.OnMainMenu();
-
-                //cheats popup
-
-                if (Cheating == true)
+                if (towerModel.name == ModContent.TowerID<ParagonTotem>())
                 {
-                    PopupScreen.instance.ShowEventPopup(PopupScreen.Placement.menuCenter, "Cheat Mods Detected", "Cheat mods have been detected. To remove this message hold down ALT + F4 to close your game, then remove your cheat mods. If not then you will not be able to continue to the game. Have fun staring at this popup! :) :) :) :) :) :) :) :) :) :) :) :)", "Neither Does This", (Action)null, "This Does Nothing", (Action)null, Popup.TransitionAnim.AnimIndex, 38);
+                    if (Settings.OPParagonTotem == true)
+                    {
+                        towerModel.GetBehavior<ParagonSacrificeBonusModel>().bonus = 9999999999999999999;
+                    }
+                    else
+                    {
+                        towerModel.GetBehavior<ParagonSacrificeBonusModel>().bonus = 2000;
+                    }
                 }
-                else
-                {
-
-                }
+            }
+        }
+        public override void OnMainMenu()
+            {
 
                 //Menu messages
 
-                if (SettingsEdited == true)
-                {
-                    if (OPParagonTotem == false)
-                    {
-                        MelonLogger.Msg(ConsoleColor.Magenta, "To switch to the regular version of the paragon totem, restart your game.");
-                        PopupScreen.instance.ShowOkPopup("To switch to the regular version of the paragon totem, restart your game.");
-                    }
-                    else
-                    {
-                        MelonLogger.Msg(ConsoleColor.Magenta, "To switch to the OP version of the paragon totem, restart your game.");
-                        PopupScreen.instance.ShowOkPopup("To switch to the OP version of the paragon totem, restart your game.");
-                    }
-                }
-                else
-                {
-                    if (OPParagonTotem == false)
+                    if (Settings.OPParagonTotem == false)
                     {
                         MelonLogger.Msg(ConsoleColor.Magenta, "The regular version of the paragon totem has been loaded.");
-                        PopupScreen.instance.ShowOkPopup("The regular version of the paragon totem has been loaded.");
+                if (Settings.TogglePopup == true)
+                {
+PopupScreen.instance.ShowOkPopup("The regular version of the paragon totem has been loaded.");
+                }
+                        
                     }
                     else
                     {
+                   
                         MelonLogger.Msg(ConsoleColor.Magenta, "The OP version of the paragon totem has been loaded.");
-                        PopupScreen.instance.ShowOkPopup("The OP version of the paragon totem has been loaded.");
-                    }
+                if (Settings.TogglePopup == true)
+                {
+PopupScreen.instance.ShowOkPopup("The OP version of the paragon totem has been loaded.");
                 }
+                        
+                    }
+                
             }
             public override void OnApplicationStart()
             {
-
-                //cheats check
-
-                if (ModContent.HasMod("BTD6 All Trophy Store Items Unlocker"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("BTD6 Boss Bloons In Sandbox"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("BTD6 Golden Bloon In Sandbox"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("BTD6 Infinite Monkey Knowledge"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("BTD6 Infinite Monkey Money"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("BTD6 Infinite Tower XP"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("Gurren Core"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("infinite_xp"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("NKHook6"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("NoAbilityCoolDown"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("UnlockAllMaps"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("UnlockDoubleCash"))
-                {
-                    Cheating = true;
-                }
-                if (ModContent.HasMod("xpfarming"))
-                {
-                    Cheating = true;
-                }
-                else
-                {
-
-                }
-
-                //save data
-
-
-                if (File.Exists(ModSettingsPath) == true)
-                {
-                    MelonLogger.Msg("Loading configs from mod settings file.");
-                }
-                else
-                {
-                    MelonLogger.Msg("Generating mod settings file.");
-                    OPParagonTotem = false;
-                    TextWriter tw = new StreamWriter(ModSettingsPath);
-                    tw.WriteLine(OPParagonTotem);
-                    tw.Close();
-                    OPParagonTotem = false;
-                }
-
-                TextReader tr = new StreamReader(ModSettingsPath);
-                OPParagonTotem = bool.Parse(tr.ReadLine());
-                tr.Close();
-
-                //console message
-
                 MelonLogger.Msg(ConsoleColor.Magenta, "Paragon Totem Loaded!");
             }
-            private static readonly ModSettingButton TurnOnOpTotem = new()
-            {
-                displayName = "Turn On OP/Regular Totem",
-                action = () =>
-                {
-                    PopupScreen.instance.ShowOkPopup("Restart the game to apply changes.");
-                    OPParagonTotem = true;
-                    TextWriter tw = new StreamWriter(ModSettingsPath);
-                    tw.WriteLine(OPParagonTotem);
-                    tw.Close();
-                    OPParagonTotem = true;
-                    SettingsEdited = true;
-                },
-                buttonText = "Op",
-            };
-            private static readonly ModSettingButton TurnOnBalancedTotem = new()
-            {
-                displayName = "",
-                action = () =>
-                {
-                    PopupScreen.instance.ShowOkPopup("Restart the game to apply changes.");
-                    //PopupScreen.instance.ShowEventPopup(PopupScreen.Placement.menuCenter, "Restart Game", "For your changes to take place you must restart the game.", "Restart Game", (Action)null , "Cancel", (Action)null, Popup.TransitionAnim.AnimIndex, 38);
-                    OPParagonTotem = false;
-                    TextWriter tw = new StreamWriter(ModSettingsPath);
-                    tw.WriteLine(OPParagonTotem);
-                    tw.Close();
-                    OPParagonTotem = false;
-                    SettingsEdited = true;
-                },
-                buttonText = "Regular",
-            };
+            
             public class ParagonTotem : ModTower
             {
                 public override string Name => nameof(ParagonTotem);
@@ -226,8 +114,6 @@ namespace ParagonTotem
 
                 public override int BottomPathUpgrades => 0;
 
-                public override ParagonMode ParagonMode => ParagonMode.Base555;
-
                 public override string TowerSet => "Support";
 
                 public override void ModifyBaseTowerModel(TowerModel towerModel)
@@ -235,14 +121,7 @@ namespace ParagonTotem
                     towerModel.RemoveBehavior<AttackModel>();
                     towerModel.display = new PrefabReference() { guidRef = "2f4aba5a77592134cb19b35e844cea8a" };
                     towerModel.GetBehavior<DisplayModel>().display = new PrefabReference() { guidRef = "2f4aba5a77592134cb19b35e844cea8a" };
-                    if(OPParagonTotem == false)
-                    {
-                        towerModel.AddBehavior(new ParagonSacrificeBonusModel("ParagonBonus", 2000));
-                    }
-                    else
-                    {
-                        towerModel.AddBehavior(new ParagonSacrificeBonusModel("ParagonBonus", 99999999999999));
-                    }
+                    towerModel.AddBehavior(new ParagonSacrificeBonusModel("ParagonBonus", 2000));
                 }
 
                 public override string Icon => "ParagonPowerTotemPortrait";
@@ -250,6 +129,24 @@ namespace ParagonTotem
                 public override string Portrait => "ParagonPowerTotemPortrait";
             }
         }
-
-    
+        public class Settings : ModSettings
+        {
+            public static readonly ModSettingBool OPParagonTotem = new(false)
+            {
+            displayName = "OP Mode of the Paragon Totem",
+            description = "Toggles the OP mode of the paragon totem",
+            button = true,
+            };
+            public static readonly ModSettingBool TogglePopup = new(true)
+            {
+            displayName = "Toggle Popup",
+            description = "Toggles the popup on main menu that tells you what version of the paragon totem you are on",
+            button = true,
+            };
+            public static readonly ModSettingInt TotemCost = new(26000)
+            {
+            displayName = "Paragon Totem Cost",
+            min = 0
+            };
+    }
 }

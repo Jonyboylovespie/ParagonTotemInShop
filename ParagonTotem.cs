@@ -2,37 +2,18 @@
 using Assets.Scripts.Models.GenericBehaviors;
 using Assets.Scripts.Models.Towers;
 using Assets.Scripts.Models.Towers.Behaviors;
-using Assets.Scripts.Models.Towers.Behaviors.Abilities;
-using Assets.Scripts.Models.Towers.Behaviors.Abilities.Behaviors;
 using Assets.Scripts.Models.Towers.Behaviors.Attack;
-using Assets.Scripts.Models.Towers.Behaviors.Attack.Behaviors;
-using Assets.Scripts.Models.Towers.Filters;
-using Assets.Scripts.Models.Towers.Projectiles;
-using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
-using Assets.Scripts.Models.Towers.TowerFilters;
-using Assets.Scripts.Models.Towers.Weapons;
-using Assets.Scripts.Models.Towers.Weapons.Behaviors;
-using Assets.Scripts.Models.TowerSets;
-using Assets.Scripts.Unity;
-using Assets.Scripts.Unity.Display;
 using Assets.Scripts.Utils;
 using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api;
-using BTD_Mod_Helper.Api.Display;
 using BTD_Mod_Helper.Api.Towers;
 using BTD_Mod_Helper.Extensions;
-using Harmony;
 using MelonLoader;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using ParagonTotem;
-using UnhollowerBaseLib;
 using BTD_Mod_Helper.Api.Data;
-using BTD_Mod_Helper.Api.Enums;
 using BTD_Mod_Helper.Api.ModOptions;
 using Assets.Scripts.Unity.UI_New.Popups;
-using System.IO;
 using BTD_Mod_Helper.Api.Helpers;
 using Assets.Scripts.Models.Towers.Mods;
 
@@ -41,7 +22,7 @@ using Assets.Scripts.Models.Towers.Mods;
 
 namespace ParagonTotem
 {
-        public class Main : BloonsTD6Mod
+    public class Main : BloonsTD6Mod
         {
             public static bool Cheating;
 

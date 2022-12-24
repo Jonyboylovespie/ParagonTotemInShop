@@ -47,8 +47,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-	<EmbeddedResource Include="ParagonPowerTotem.png" />
-	<EmbeddedResource Include="ParagonPowerTotemPortrait.png" />
+    <EmbeddedResource Include="ParagonPowerTotem.png" />
+    <EmbeddedResource Include="ParagonPowerTotemPortrait.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -59,6 +59,9 @@
     </Reference>
     <Reference Include="BloonsTD6 Mod Helper">
       <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\Mods\BloonsTD6 Mod Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
@@ -71,9 +74,6 @@
     </Reference>
     <Reference Include="MelonLoader">
       <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\MelonLoader.dll</HintPath>
-    </Reference>
-    <Reference Include="UnhollowerBaseLib">
-      <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\Dependencies\Il2CppAssemblyGenerator\Il2CppAssemblyUnhollower\UnhollowerBaseLib.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">

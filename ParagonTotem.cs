@@ -1,21 +1,21 @@
-﻿using Assets.Scripts.Models;
-using Assets.Scripts.Models.GenericBehaviors;
-using Assets.Scripts.Models.Towers;
-using Assets.Scripts.Models.Towers.Behaviors;
-using Assets.Scripts.Models.Towers.Behaviors.Attack;
-using Assets.Scripts.Utils;
+﻿using Il2CppAssets.Scripts.Models;
+using Il2CppAssets.Scripts.Models.GenericBehaviors;
+using Il2CppAssets.Scripts.Models.Towers;
+using Il2CppAssets.Scripts.Models.Towers.Behaviors;
+using Il2CppAssets.Scripts.Models.Towers.Behaviors.Attack;
+using Il2CppAssets.Scripts.Utils;
 using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api;
 using BTD_Mod_Helper.Api.Towers;
 using BTD_Mod_Helper.Extensions;
 using MelonLoader;
-using System;
 using ParagonTotem;
 using BTD_Mod_Helper.Api.Data;
 using BTD_Mod_Helper.Api.ModOptions;
-using Assets.Scripts.Unity.UI_New.Popups;
+using Il2CppAssets.Scripts.Unity.UI_New.Popups;
 using BTD_Mod_Helper.Api.Helpers;
-using Assets.Scripts.Models.Towers.Mods;
+using Il2CppAssets.Scripts.Models.Towers.Mods;
+using Il2CppAssets.Scripts.Models.TowerSets;
 
 [assembly: MelonInfo(typeof(ParagonTotem.Main), ModHelperData.Name, ModHelperData.Version, ModHelperData.RepoOwner)]
 [assembly: MelonGame("Ninja Kiwi", "BloonsTD6")]
@@ -53,7 +53,7 @@ namespace ParagonTotem
 
                     if (Settings.OPParagonTotem == false)
                     {
-                        MelonLogger.Msg(ConsoleColor.Magenta, "The regular version of the paragon totem has been loaded.");
+                        MelonLogger.Msg(System.ConsoleColor.Magenta, "The regular version of the paragon totem has been loaded.");
                 if (Settings.TogglePopup == true)
                 {
 PopupScreen.instance.ShowOkPopup("The regular version of the paragon totem has been loaded.");
@@ -63,7 +63,7 @@ PopupScreen.instance.ShowOkPopup("The regular version of the paragon totem has b
                     else
                     {
                    
-                        MelonLogger.Msg(ConsoleColor.Magenta, "The OP version of the paragon totem has been loaded.");
+                        MelonLogger.Msg(System.ConsoleColor.Magenta, "The OP version of the paragon totem has been loaded.");
                 if (Settings.TogglePopup == true)
                 {
 PopupScreen.instance.ShowOkPopup("The OP version of the paragon totem has been loaded.");
@@ -74,7 +74,7 @@ PopupScreen.instance.ShowOkPopup("The OP version of the paragon totem has been l
             }
             public override void OnApplicationStart()
             {
-                MelonLogger.Msg(ConsoleColor.Magenta, "Paragon Totem Loaded!");
+                MelonLogger.Msg(System.ConsoleColor.Magenta, "Paragon Totem Loaded!");
             }
             
             public class ParagonTotem : ModTower
@@ -95,7 +95,7 @@ PopupScreen.instance.ShowOkPopup("The OP version of the paragon totem has been l
 
                 public override int BottomPathUpgrades => 0;
 
-                public override string TowerSet => "Support";
+                public override TowerSet TowerSet => TowerSet.Support;
 
                 public override void ModifyBaseTowerModel(TowerModel towerModel)
                 {

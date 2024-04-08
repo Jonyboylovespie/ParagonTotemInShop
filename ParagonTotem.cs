@@ -3,7 +3,6 @@ using Il2CppAssets.Scripts.Models.GenericBehaviors;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors.Attack;
-using Il2CppAssets.Scripts.Utils;
 using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api;
 using BTD_Mod_Helper.Api.Towers;
@@ -14,8 +13,8 @@ using BTD_Mod_Helper.Api.Data;
 using BTD_Mod_Helper.Api.ModOptions;
 using Il2CppAssets.Scripts.Unity.UI_New.Popups;
 using BTD_Mod_Helper.Api.Helpers;
-using Il2CppAssets.Scripts.Models.Towers.Mods;
 using Il2CppAssets.Scripts.Models.TowerSets;
+using Il2CppNinjaKiwi.Common.ResourceUtils;
 
 [assembly: MelonInfo(typeof(ParagonTotem.Main), ModHelperData.Name, ModHelperData.Version, ModHelperData.RepoOwner)]
 [assembly: MelonGame("Ninja Kiwi", "BloonsTD6")]
